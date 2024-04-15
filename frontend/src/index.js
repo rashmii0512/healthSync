@@ -5,7 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 import Body from './components/Body';
+import Chat from './components/Chat';
 
+import { RecoilRoot } from 'recoil';
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -14,6 +16,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Body />
+      },
+      {
+        path: "/chat",
+        element: <Chat />
       }
     ]
   }
@@ -23,9 +29,14 @@ const appRouter = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode> 
+  <RecoilRoot>
   <RouterProvider router={appRouter}>
-    <App />
+    
+      <App />
+    
+    
     </ RouterProvider>
+    </RecoilRoot>
   // </React.StrictMode>
 );
 
