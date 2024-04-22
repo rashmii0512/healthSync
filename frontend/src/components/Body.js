@@ -19,6 +19,7 @@ const Body = () => {
   return(
       <div>
           body here
+          <div className="font-bold">color pink</div>
           {/* <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer">Go to ChainLit</a> */}
           <div>
             

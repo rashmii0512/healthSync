@@ -88,8 +88,8 @@ function Chat() {
     <div>
       
       <div>
-        <div id="assistant-chat" className="ai_chart">
-          <div className="header-chat">
+        <div id="" className="mx-[20%]">
+          <div className="">
             <div className="head-home">
               <div className="info-avatar">
                 <Svg />
@@ -145,6 +145,7 @@ function Chat() {
           Chat with Us
         </a> */}
       </div>
+      
     </div>
   );
 }

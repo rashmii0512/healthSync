@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 import Body from './components/Body';
 import Chat from './components/Chat';
+import Chatbot from './components/Chatbot';
 
 import { RecoilRoot } from 'recoil';
 const appRouter = createBrowserRouter([
@@ -20,6 +21,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/chat",
         element: <Chat />
+      },
+      {
+        path: "/chatbot",
+        element: <Chatbot />
       }
     ]
   }

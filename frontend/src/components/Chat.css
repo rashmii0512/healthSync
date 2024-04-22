@@ -139,7 +139,6 @@ my styles
     left: 0;
     overflow: hidden;
     z-index: 10000000 !important;
-    animation-name: showchat;
     animation-duration: 1s;
     transform: scale(1);
     background-color: #fff;
