@@ -1,12 +1,15 @@
 ﻿# healthSync
 
+cd chatbot
 
-# cd chatbot
-# pip install -r requirements.txt
-# python app.py
+- python -m venv venv
+- .\venv\Scripts\activate
+- install all the required libraries from requirement.txt
+- python app.py
 
 
-# other terminal 
-# cd frontend
-# npm install
-# npm start
+
+other terminal 
+- cd frontend
+- npm install
+- npm start
