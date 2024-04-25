@@ -16,8 +16,8 @@ const Header = () => {
                 <ul className="flex " >
                     {/* <li className=" p-5 text-lg">status: {onlineStatus === true ? "online" : "offline" }</li> */}
                     <li className="p-5 text-lg "><Link to="/">Home</Link></li>
-                    <li className="p-5 text-lg "><Link to="/map">About us</Link></li>
-                    <li className="p-5 text-lg "><Link to="/login">Contact us</Link></li>                    
+                    <li className="p-5 text-lg "><Link to="/chatbot">Chatbot</Link></li>
+                    <li className="p-5 text-lg "><Link to="/login">Log in</Link></li>                    
                 </ul>
             </div>
         </div>

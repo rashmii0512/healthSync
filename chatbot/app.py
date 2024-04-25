@@ -669,7 +669,7 @@ import itertools
 from spacy.lang.en.stop_words import STOP_WORDS
 import spacy
 import joblib
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, render_template_string
 
 app = Flask(__name__)
 
@@ -981,13 +981,13 @@ def calc_condition(exp, days):
 # print possible symptoms
 #It returns 1 if the condition is severe, suggesting consultation with a doctor, and 0 otherwise.
 def related_sym(psym1):
-    s = "could you be more specific, <br>"
+    s = "could you be more specific, <br/>"
     i = len(s)
     for num, it in enumerate(psym1):
-        s += str(num) + ") " + clean_symp(it) + "<br>"
+        s += str(num) + ") " + clean_symp(it) + "<br/>"
     if num != 0:
         s += "Select the one you meant."
-        return s
+        return render_template_string(s)
     else:
         return 0
 
@@ -1281,9 +1281,9 @@ def get_bot_response():
         if result is not None:
             if result[0] != session["testpred"]:
                 session['step'] = "Q_C"
-                return "as you provide me with few symptoms, I am sorry to announce that I cannot predict your " \
-                       "disease for the moment!!! <br> Can you specify more about what you are feeling or Tap q to " \
-                       "stop the conversation "
+                return render_template_string("as you provide me with few symptoms, I am sorry to announce that I cannot predict your " \
+                       "disease for the moment!!! <br/> Can you specify more about what you are feeling or Tap q to " \
+                       "stop the conversation ")
             session['step'] = "Description"
             session["disease"] = result[0]
             return "Well Mr/Ms " + session["name"] + ", you may have " + result[
@@ -1298,7 +1298,7 @@ def get_bot_response():
         session['step'] = "Severity"
         # session['step'] = "FINAL"
         if session["disease"] in description_list.keys():
-            return description_list[session["disease"]] + " \n <br>  How many days have you had symptoms?"
+            return render_template_string(description_list[session["disease"]] + " \n <br/>  How many days have you had symptoms?")
         else:
             if " " in session["disease"]:
                 session["disease"] = session["disease"].replace(" ", "_")
@@ -1308,15 +1308,15 @@ def get_bot_response():
     if session['step'] == "Severity":
         session['step'] = 'FINAL'
         if calc_condition(session["all"], int(s)) == 1:
-            return "you should take the consultation from doctor <br> Tap q to exit"
+            return render_template_string("you should take the consultation from doctor <br/> Tap q to exit")
         else:
-            msg = 'Nothing to worry about, but you should take the following precautions :<br> '
+            msg = 'Nothing to worry about, but you should take the following precautions :<br/> '
             i = 1
             for e in precautionDictionary[session["disease"]]:
-                msg += '\n ' + str(i) + ' - ' + e + '<br>'
+                msg += '\n ' + str(i) + ' - ' + e + '<br/>'
                 i += 1
             msg += ' Tap q to end'
-            return msg
+            return render_template_string(msg)
     
     if session['step'] == "FINAL":
         session['step'] = "BYE"

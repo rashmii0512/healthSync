@@ -1,53 +1,3 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
-// const Chatbot = () => {
-//   const [messages, setMessages] = useState([]);
-//   const [inputValue, setInputValue] = useState('');
-
-//   const sendMessage = async () => {
-//     if (inputValue.trim() === '') return;
-
-//     const response = await axios.get('/get', {
-//       params: { msg: inputValue },
-//     });
-
-//     setMessages([...messages, { text: inputValue, type: 'user' }]);
-//     setMessages([...messages, { text: response.data, type: 'bot' }]);
-//     setInputValue('');
-//   };
-
-//   return (
-//     <div>
-//       <h1>Chatbot</h1>
-//       <div style={{ minHeight: '200px', border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
-//         {messages.map((message, index) => (
-//           <div key={index} style={{ marginBottom: '5px' }}>
-//             <span style={{ fontWeight: message.type === 'bot' ? 'bold' : 'normal' }}>
-//               {message.type === 'bot' ? 'Bot: ' : 'User: '}
-//             </span>
-//             {message.text}
-//           </div>
-//         ))}
-//       </div>
-//       <div style={{ display: 'flex', marginBottom: '10px' }}>
-//         <input
-//           type="text"
-//           value={inputValue}
-//           onChange={(e) => setInputValue(e.target.value)}
-//           style={{ flex: 1, marginRight: '10px', padding: '5px' }}
-//         />
-//         <button onClick={sendMessage} style={{ padding: '5px 10px' }}>
-//           Send
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Chatbot;
-
-// fa-paper-plane
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckSquare, faCoffee, faPaperPlane, faRobot, faUser } from '@fortawesome/free-solid-svg-icons'
 import robot from "../images/robot_3558860.png"
@@ -96,7 +46,7 @@ const Chatbot = () => {
 
 
   return (
-    <div className="flex-1 mx-[20%]">
+    <div className="flex-1 mx-[20%] h-[50vh] ">
 
       {messages.length == 0 && (
               <div className="flex flex-col items-center justify-center"> 
@@ -106,13 +56,15 @@ const Chatbot = () => {
               
         )}
 
-      <div
+        <div className="h-[140%] overflow-y-auto">
+          
+<div
         className=""
 
         ref={chatContainerRef}
         style={{
           flex: 1,
-          overflowY: 'auto',
+          // overflowY: 'auto',
           padding: '20px',
           marginBottom: '60px', // Adjusted to accommodate the input bar
       
@@ -123,7 +75,7 @@ const Chatbot = () => {
 
         {messages.map((message, index) => (
           <div
-            className="flex"
+            className="flex "
             key={index}
             style={{
               // display: 'f',
@@ -184,8 +136,11 @@ const Chatbot = () => {
 
             
       </div>
+        </div>
+
+      
       <div
-        className='w-[70%] mx-[15%] my-[2%]'
+        className='w-[70%] mx-[15%] my-[2%] '
         style={{
           position: 'fixed',
           bottom: 0,
@@ -256,3 +211,6 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
+
+
+

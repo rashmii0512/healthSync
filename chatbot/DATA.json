@@ -1,1 +1,15 @@
-{"users": []}
+{
+    "users": [
+        {
+            "Name": "rashmi",
+            "Age": 20,
+            "Gender": "female",
+            "Disease": "Fungal infection",
+            "Sympts": [
+                "itching",
+                "dischromic _patches",
+                "nodal_skin_eruptions"
+            ]
+        }
+    ]
+}
