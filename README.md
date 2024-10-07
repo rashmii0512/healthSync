@@ -6,7 +6,7 @@ cd chatbot
 - .\venv\Scripts\activate
 - install all the required libraries from requirement.txt
 - python -m spacy download en_core_web_lg
-- python app.py
+- python app_new.py
 
 
 
