@@ -1,15 +1,48 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckSquare, faCoffee, faPaperPlane, faRobot, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faPaperPlane, faRobot, faUser , faUpload} from '@fortawesome/free-solid-svg-icons'
 import robot from "../images/robot_3558860.png"
 
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
+
+
+
+
+
+
+
+
 const Chatbot = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{ text: "Hello, what is your name?", type: "bot" }]);
   const [inputValue, setInputValue] = useState('');
   const chatContainerRef = useRef(null);
   const inputRef = useRef(null);
+  const fileInputRef = useRef(null); // Add this line
+
+
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('xray-image', file);
+  
+      try {
+        const response = await axios.post('/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+  
+        const updatedMessages = messages.concat({ text: 'Image uploaded', type: 'user' });
+        updatedMessages.push({ text: response.data, type: 'bot' });
+        setMessages(updatedMessages);
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // Optionally, you can display an error message to the user
+      }
+    }
+  };
   
 
   useEffect(() => {
@@ -115,15 +148,15 @@ const Chatbot = () => {
                 wordWrap: 'break-word',
               }}
             >
-              {message.text.length < 10 && ( // Check message length before rendering
-              <span className="px-5 ">{message.text}</span>
-              )}
+                {message.text.length < 10 && ( // Check message length before rendering
+                <span className="px-5 " dangerouslySetInnerHTML={{ __html: message.text }}/>
+                )}
 
-            {message.text.length >= 15 && ( // Check message length before rendering
-              <span >{message.text}</span>
-              )}
-              {/* {message.text} */}
-            </div>
+              {message.text.length >= 15 && ( // Check message length before rendering
+                <span dangerouslySetInnerHTML={{ __html: message.text }}/>
+                )}
+                {/* {message.text} */}
+              </div>
 
             
 
@@ -153,6 +186,18 @@ const Chatbot = () => {
           
         }}
       >
+
+
+      {/* Hidden file input */}
+      <input
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        ref={fileInputRef}
+        onChange={handleFileUpload}
+      />
+
+        
         <input
           onKeyDown={(e)=>{
             if(e.key === "Enter"){
@@ -181,6 +226,23 @@ const Chatbot = () => {
           
           placeholder="Type a message..."
         />
+
+<button
+        onClick={() => fileInputRef.current.click()}
+        className="bg-ourBlue"
+        style={{
+          padding: '14px 20px',
+          color: '#fff',
+          borderRight: '1px solid',
+          borderTop: '1px solid ',
+          borderBottom: '1px solid ',
+          borderColor: '#3CB19C', 
+          cursor: 'pointer',
+        }}
+      >
+        <FontAwesomeIcon icon={faUpload} />
+      </button>
+      
         <button
 
                  
@@ -205,6 +267,8 @@ const Chatbot = () => {
         >
           <FontAwesomeIcon icon={faPaperPlane} />
         </button>
+
+        
       </div>
     </div>
   );
